@@ -1,0 +1,125 @@
+import java.util.Scanner;
+public class Online_Examination{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String inputUsername,inputPassword;
+        //(1)Login:
+        System.out.println("***ONLINE EXAMINATION***");
+        System.out.println("Please Login to proceed:");
+        System.out.print("USERNAME:");
+        inputUsername=sc.nextLine();
+        System.out.print("PASSWORD:");
+        inputPassword=sc.nextLine();
+
+        if(isAuthenticatedUser(inputUsername,inputPassword)){
+            System.out.println("Login Successful!\n");
+
+        //(2)UPDATE PROFILE:
+        updateProfile(inputUsername);
+        updatePassword(inputUsername);
+
+        //(3)SELECTING ANSWERS FOR MCQ'S:
+        System.out.println("***MCQ Section***");
+        boolean isSubmitted=selectAnswers();
+
+        //(4)Time & AutoSubmit:
+        System.out.println("***TIME & AUTO-SUBMIT");
+        timer(15);
+        if(!isSubmitted){
+            autoSubmit();
+        }
+
+        //(5)Closing session & Logout
+        System.out.println("***CLOSING SESSION & LOGOUT***");
+        closeSession(inputUsername);
+        logout();
+    } else{
+        System.out.println("Login Failed.Please try again.");
+    }
+}
+    //Method to check whether the user is authenticated or not:
+    public static boolean isAuthenticatedUser(String inputUsername,String inputPassword){
+        String validUsername="raheem";
+        String validPassword="raheem2023";
+        return inputUsername.equals(validUsername) && inputPassword.equals(validPassword);
+    }
+    //Method for Updating Profile:
+    public static void updateProfile(String inputUsername){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Updating profile for user:"+inputUsername);
+        System.out.print("Enter your name:");
+        String name = sc.nextLine();
+        System.out.print("Enter email address:");
+        String email = sc.nextLine();
+        //Add your profile logic here
+        System.out.println("Profile updated successfully..!\n");
+    }
+    public static void updatePassword(String inputUsername){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Updating password for user:"+inputUsername);
+        System.out.print("Enter your current password:");
+        String currentPassword = sc.nextLine();
+        System.out.print("Enter new password:");
+        String newPassword = sc.nextLine();
+        //Add your password update logic here
+        System.out.println("Password updated successfully..!\n");
+    }
+    //Method to conduct MCQ'S:
+    public static boolean selectAnswers(){
+        Scanner sc = new Scanner(System.in);
+        //MCQ selection logic
+        System.out.println("Select the correct option(A,B,C,D):");
+        System.out.println("1Q Who is the father of Java language?");
+        System.out.println("   (A) Steve Jobs");
+        System.out.println("   (B) James Gosling");
+        System.out.println("   (C) Dennis Ritchie");
+        System.out.println("   (D) Rasmus Lerdorf");
+        System.out.print("Select option:");
+        String Ans_1 = sc.nextLine();
+
+        System.out.println("2Q Number of primitive data types in Java are?");
+        System.out.println("   (A) 6");
+        System.out.println("   (B) 7");
+        System.out.println("   (C) 8");
+        System.out.println("   (D) 9");
+        System.out.print("Select option:");
+        String Ans_2 = sc.nextLine();
+
+        System.out.println("3Q Select the valid statement.");
+        System.out.println("   (A) char[] ch = new char(5)");
+        System.out.println("   (B) char[] ch = new char[5]");
+        System.out.println("   (C) char[] ch = new char()");
+        System.out.println("   (D) char[] ch = new char[]");
+        System.out.print("Select option:");
+        String Ans_3 = sc.nextLine();
+
+        //After receiving all answers we can evaluate them later
+
+        System.out.println("Answers submitted!\n");
+        return true;
+    }
+    //Method for count down:
+    public static void timer(int seconds){
+        //Adding timer logic
+        System.out.println("Timer started for 15 seconds.\n");
+        try{
+            Thread.sleep(seconds*15);
+        } catch(InterruptedException ex){
+            ex.printStackTrace();
+        }
+    }
+    //Method for Auto-Submitting in case user took more time.
+    public static void autoSubmit(){
+        //Adding auto-submit logic
+        System.out.println("Time is up..! Auto submitting answer..\n");
+    }
+    //Method for Closing Session:
+    public static void closeSession(String inputUsername){
+        //Session closing logic
+        System.out.println("Session closed for the user " + inputUsername +"\n");
+    }
+    public static void logout(){
+        //logout logic
+        System.out.println("Successfully Logout.");
+}
+}
